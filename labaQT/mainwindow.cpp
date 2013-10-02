@@ -102,3 +102,8 @@ void MainWindow::on_pushButton_12_clicked()
 {
     ui->widget->setSci(ui->spinBox->value(),ui->spinBox_2->value(),ui->spinBox_3->value(),ui->spinBox_4->value());
 }
+
+void MainWindow::on_pushButton_13_clicked()
+{
+    ui->widget->setAlpha(ui->doubleSpinBox_5->value());
+}

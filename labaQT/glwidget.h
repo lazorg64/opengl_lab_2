@@ -15,7 +15,7 @@ private:
     GLfloat nSca;
 
     int scx,scy,he,wi;
-
+    float alpha;
     QPoint ptrMousePosition;
 public:
 
@@ -40,6 +40,7 @@ public:
     void drawLine();
     void drawPoint();
     void setSci(int x,int y,int h,int w);
+    void setAlpha(float input);
 };
 
 #endif // GLWIDGET_H

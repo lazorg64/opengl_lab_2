@@ -13,6 +13,7 @@ GLWidget::GLWidget(QWidget *parent) :
     scy=0;
     wi=1000;
     he=1000;
+    alpha=1;
 }
 
 void GLWidget::initializeGL(){
@@ -44,12 +45,12 @@ void GLWidget::paintGL(){
     glRotatef(zRot, 0.0f, 0.0f, 1.0f);
     drawAxis();
 
-
+    glEnable(GL_ALPHA_TEST);
     glEnable(GL_SCISSOR_TEST);
 
-      glScissor(scx,scy,wi,he);
+    glScissor(scx,scy,wi,he);
 
-
+    glAlphaFunc(GL_GREATER,alpha);
     switch (fig)
     {
         case 0:
@@ -85,6 +86,7 @@ void GLWidget::paintGL(){
         break;
     }
   glDisable(GL_SCISSOR_TEST);//запрещаю рисовать
+  glDisable(GL_ALPHA_TEST);
 }
 void GLWidget::resizeGL(int nWidth, int nHeight)
 {
@@ -264,4 +266,9 @@ void GLWidget::setSci(int x,int y,int h,int w)
     scy=y;
     he=h;
     wi=w;
+}
+
+void GLWidget::setAlpha(float input)
+{
+    alpha=input;
 }
