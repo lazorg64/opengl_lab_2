@@ -13,7 +13,7 @@ GLWidget::GLWidget(QWidget *parent) :
     scy=0;
     wi=1000;
     he=1000;
-    alpha=1;
+    alpha=0;
     com_alpha=1;
 }
 
