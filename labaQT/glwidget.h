@@ -16,6 +16,7 @@ private:
 
     int scx,scy,he,wi;
     float alpha;
+    float com_alpha;
     QPoint ptrMousePosition;
 public:
 
@@ -41,6 +42,7 @@ public:
     void drawPoint();
     void setSci(int x,int y,int h,int w);
     void setAlpha(float input);
+    void setCom_Alpha(float input);
 };
 
 #endif // GLWIDGET_H

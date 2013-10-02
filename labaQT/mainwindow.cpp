@@ -107,3 +107,8 @@ void MainWindow::on_pushButton_13_clicked()
 {
     ui->widget->setAlpha(ui->doubleSpinBox_5->value());
 }
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    ui->widget->setCom_Alpha(ui->doubleSpinBox->value());
+}

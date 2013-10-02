@@ -14,6 +14,7 @@ GLWidget::GLWidget(QWidget *parent) :
     wi=1000;
     he=1000;
     alpha=1;
+    com_alpha=1;
 }
 
 void GLWidget::initializeGL(){
@@ -77,6 +78,7 @@ void GLWidget::paintGL(){
         break;
         case 7:
         drawLineLoop();
+        break;
         case 8:
         drawLineStrip();
         break;
@@ -154,10 +156,11 @@ void GLWidget::drawAxis()
       glVertex3d( 0.0f,  0.0f, -1.0f);
    glEnd();
 }
+
 void GLWidget::drawPoint()
 {
     glBegin(GL_POINTS);//рисуем точку
-    glColor3f(1,0,0);
+    glColor4f(1,0,0,com_alpha);
     glVertex3d(-0.05,-0.05,0);
     glEnd();
 }
@@ -165,7 +168,7 @@ void GLWidget::drawPoint()
 void GLWidget::drawLine()
 {
     glBegin(GL_LINES);//рисуем прямую
-    glColor3f(1,1,0);
+    glColor4f(1,1,0,com_alpha);
     glVertex3d(-0.05,-0.05,0);
     glVertex3d(+0.05,-0.05,0);
 
@@ -175,6 +178,7 @@ void GLWidget::drawLine()
 void GLWidget::drawLineStrip()
 {
     glBegin(GL_LINE_STRIP);//рисуем последовательные прямые
+    glColor4f(1.0, 0.0, 1.0,com_alpha);
     glVertex3d(-0.05,-0.05,0);
     glVertex3d(+0.05,-0.05,0);
     glVertex3d(+0.05,+0.05,0);
@@ -184,21 +188,25 @@ void GLWidget::drawLineStrip()
 
 void GLWidget::drawLineLoop()
 {
+
     glBegin(GL_LINE_LOOP);//рисует замкнтые кривые линии
-    glVertex3d(-0.35,-0.35,0);
+    glColor4f(1.0,0.5f,0.0f,com_alpha);
+    glVertex3d(-1,-0.35,0);
+    glVertex3d(+0.35,-1,0);
     glVertex3d(+0.35,+0.35,0);
-    glVertex3d(+0.35,-0.35,0);
+
 
     glEnd();
 }
 
 void GLWidget::drawTr()
 {
+
     glBegin(GL_TRIANGLES);//сует треугольник
-    glColor4f(0.04,0.2,0.9,0.5);
+    glColor4f(0.35,0.12,0.457,com_alpha);
     glVertex3d(-0.35,-0.35,0);
-    glVertex3d(+0.35,+0.35,0);
     glVertex3d(+0.35,-0.35,0);
+    glVertex3d(+0.35,+0.35,0);
 
     glEnd();
 }
@@ -206,13 +214,12 @@ void GLWidget::drawTr()
 void GLWidget::drawTrStrip()
 {
     glBegin(GL_TRIANGLE_STRIP);//рисуем много связанных треугольников
-    glColor3f(1,0.2,0);
-    glVertex3d(-0.35,-0.35,0);
-    glVertex3d(+0.35,+0.35,0);
-    glVertex3d(+0.05,-0.35,0);
+    glColor4f(0.6,0.1,0.5,com_alpha);
+    glVertex3f( 0.5f, 0.5f, 0.0f ); //vertex 4
+    glVertex3f( 0.0f, 0.5f, 0.0f ); //vertex 2
+    glVertex3f( 0.5f, 0.0f, 0.0f ); //vertex 3
+    glVertex3f( 0.0f, 0.0f, 0.0f ); //vertex 1
 
-    glColor3f(1,1,0);
-    glVertex3d(+0.55,-0.55,0);
     glEnd();
 }
 
@@ -220,11 +227,18 @@ void GLWidget::drawTrStrip()
 void GLWidget::drawPolygon()
 {
     glBegin(GL_POLYGON);
-    glVertex3d(-0.35,-0.35,0);
-    glVertex3d(+0.35,+0.35,0);
-    glVertex3d(+0.85,-0.35,0);
-    glVertex3d(+0.55,-0.55,0);
-    glVertex3d(+0.55,+0.55,0);
+      glColor4f(0.7,0.05,0.1,com_alpha);
+      glVertex3f(-0.2f,0.5f,-0.5f);
+      glVertex3f(-0.5f,0.2f,-0.5f);
+      glVertex3f(-0.5f,-0.2f,-0.5f);
+      glVertex3f(-0.2f,-0.5f,-0.5f);
+      glVertex3f(0.2f,-0.5f,-0.5f);
+      glVertex3f( 0.5f,-0.2f,-0.5f);
+      glVertex3f(0.5f,0.2f,  -0.5f);
+      glVertex3f( 0.2f, 0.5f,-0.5f);
+
+
+
 
     glEnd();
 }
@@ -232,11 +246,16 @@ void GLWidget::drawPolygon()
 void GLWidget::drawQuadStrip()
 {
     glBegin(GL_QUAD_STRIP);
-    glVertex3d(-0.35,-0.55,0);
-    glVertex3d(+0.35,+0.55,0);
-    glVertex3d(+0.35,-0.55,0);
-    glVertex3d(+0.55,-0.55,0);
-    glVertex3d(+0.55,+0.55,0);
+     glColor4f(0.46,0.21,0.15,com_alpha);
+    glVertex3f( 0.5f, 0.5f, 0.0f ); //vertex 4
+    glVertex3f( 0.0f, 0.5f, 0.0f ); //vertex 2
+    glVertex3f( 0.5f, 0.0f, 0.0f ); //vertex 3
+    glVertex3f( 0.0f, 0.0f, 0.0f ); //vertex 1
+
+    glVertex3f( 0.5f, 0.5f, 0.0f ); //vertex 2
+    glVertex3f( 0.5f, 0.0f, 0.0f ); //vertex 3
+    glVertex3f( 0.8f, 0.8f, 0.0f ); //vertex 1
+    glVertex3f( 1.0f, 0.5f, 0.0f ); //vertex 1
 
     glEnd();
 }
@@ -244,10 +263,14 @@ void GLWidget::drawQuadStrip()
 void GLWidget::drawQuad()
 {
     glBegin(GL_QUADS);
-    glVertex3d(-0.35,-0.35,0);
-    glVertex3d(+0.35,+0.35,0);
-    glVertex3d(+0.35,-0.35,0);
-    glVertex3d(+0.55,-0.55,0);
+     glColor4f(0.46,0.0,0.95,com_alpha);
+    glVertex3d(+0.25,-0.55,0);//1
+    glVertex3d(+0.35,-0.35,0);//2
+    glVertex3d(+0.35,+0.35,0);//3
+    glVertex3d(-0.35,-0.35,0);//4
+
+
+
 
     glEnd();
 }
@@ -255,14 +278,19 @@ void GLWidget::drawQuad()
 void GLWidget::drawTrFan()
 {
     glBegin(GL_TRIANGLE_FAN);
-    glVertex3d(-0.35,-0.35,0);
-    glVertex3d(+0.35,+0.35,0);
-    glVertex3d(+0.35,-0.35,0);
+    glColor4f(0.46,0.0,0.95,com_alpha);
+    glVertex3f( 0.5f, 0.5f, 0.0f ); //vertex 4
+    glVertex3f( 0.0f, 0.5f, 0.0f ); //vertex 2
+    glVertex3f( 0.5f, 0.0f, 0.0f ); //vertex 3
 
-    glVertex3d(+0.55,-0.55,0);
+    glVertex3f( 0.5f, 0.5f, 0.0f ); //vertex 2
+    glVertex3f( 0.5f, 0.0f, 0.0f ); //vertex 3
+    glVertex3f( 0.8f, 0.8f, 0.0f ); //vertex 1
+
 
     glEnd();
 }
+
 
 void GLWidget::setSci(int x,int y,int h,int w)
 {
@@ -275,4 +303,10 @@ void GLWidget::setSci(int x,int y,int h,int w)
 void GLWidget::setAlpha(float input)
 {
     alpha=input;
+}
+
+
+void GLWidget::setCom_Alpha(float input)
+{
+    com_alpha=input;
 }
