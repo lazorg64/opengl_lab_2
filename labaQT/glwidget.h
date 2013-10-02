@@ -6,12 +6,27 @@
 class GLWidget : public QGLWidget
 {
     Q_OBJECT
-public:
-    explicit GLWidget(QWidget *parent = 0);
+private:
     int fig;
+    GLfloat xRot;
+    GLfloat yRot;
+    GLfloat zRot;
+    GLfloat zTra;
+    GLfloat nSca;
+
+    int scx,scy,he,wi;
+
+    QPoint ptrMousePosition;
+public:
+
+    explicit GLWidget(QWidget *parent = 0);
+    void drawAxis();
     void initializeGL();
     void paintGL();
-    void resizeGL(int w,int h);
+    void resizeGL(int nWidth, int nHeight);
+    void mousePressEvent(QMouseEvent* pe);
+    void mouseMoveEvent(QMouseEvent* pe);
+    void mouseReleaseEvent(QMouseEvent* pe);
     void setFigure(int input);
 
     void drawPolygon();
@@ -24,7 +39,7 @@ public:
     void drawLineStrip();
     void drawLine();
     void drawPoint();
-    void Sci();
+    void setSci(int x,int y,int h,int w);
 };
 
 #endif // GLWIDGET_H
