@@ -47,6 +47,8 @@ void GLWidget::paintGL(){
 
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_SCISSOR_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
     glScissor(scx,scy,wi,he);
 
@@ -85,6 +87,7 @@ void GLWidget::paintGL(){
         drawPoint();
         break;
     }
+    glDisable(GL_BLEND);
   glDisable(GL_SCISSOR_TEST);//запрещаю рисовать
   glDisable(GL_ALPHA_TEST);
 }
@@ -192,6 +195,7 @@ void GLWidget::drawLineLoop()
 void GLWidget::drawTr()
 {
     glBegin(GL_TRIANGLES);//сует треугольник
+    glColor4f(0.04,0.2,0.9,0.5);
     glVertex3d(-0.35,-0.35,0);
     glVertex3d(+0.35,+0.35,0);
     glVertex3d(+0.35,-0.35,0);
